@@ -1,6 +1,7 @@
 PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
 FONT_FAMILY="JetBrainsMono Nerd Font"
 SPOTIFY_EVENT="com.spotify.client.PlaybackStateChanged"
+MAIN_DISPLAY=$(system_profiler SPDisplaysDataType | grep -B 3 'Main Display:' | awk '/Display Type/ {print $3}')
 
 sketchybar --bar height=32 \
                  blur_radius=0 \
@@ -38,12 +39,16 @@ do
   sid=$(($i+1))
   sketchybar --add space space.$sid left \
   sketchybar --set space.$sid associated_space=$sid \
-                              icon.font="$FONT_FAMILY:Light Italic:12.0" \
+                              icon.font="$FONT_FAMILY:Semibold Italic:12.0" \
                               label.font="sketchybar-app-font:Regular:12.0" \
                               icon="${SPACES[i]}" \
                               icon.y_offset=0 \
                               label.y_offset=-1 \
                               script="$PLUGIN_DIR/workspaces.sh" \
+                              associated_display=1 \
+                              background.padding_left=1 \
+                              background.padding_right=1 \
+                              click_script="yabai -m space --focus $sid" \
              --subscribe space.$sid front_app_switched
 done
 
@@ -63,18 +68,32 @@ sketchybar --add item time right \
                       icon="" \
                       icon.font="$FONT_FAMILY:ExtraBold:13.0" \
                       icon.y_offset=0 \
-           --add item focus center \
+           --add item focus left \
            --set focus script="$PLUGIN_DIR/focus.sh" \
                        icon.color=0xff50fa7b \
                        label.color=0xff50fa7b \
-           --subscribe focus front_app_switched window_focus title_change \
-           --add item music right \
+                       associated_display=active \
+                       background.padding_left=6 \
+           --subscribe focus front_app_switched window_focus title_change display_change
+           
+if [ $MAIN_DISPLAY = "Built-In" ]; then
+    sketchybar --add item battery right \
+               --set battery script="$PLUGIN_DIR/battery.sh" \
+                             icon.font="$FONT_FAMILY:ExtraBold:13.0" \
+                             icon.y_offset=0 \
+                             update_freq=120 \
+                             associated_display=1 \
+               --subscribe battery system_woke power_source_change
+fi
+
+sketchybar --add item music right \
            --set music label.drawing=off \
 		       icon.drawing=off \
                        icon.font="sketchybar-app-font:Regular:11.0" \
                        icon.y_offset=0 \
                        icon=":statistics:" \
                        script="$PLUGIN_DIR/music.sh" \
-	    --subscribe music spotify_change
+                       click_script="open -a Spotify" \
+	   --subscribe music spotify_change
 
 sketchybar --update

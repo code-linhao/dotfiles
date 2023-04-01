@@ -2,12 +2,16 @@ if [[ $SELECTED == true ]]; then
     sketchybar --set $NAME icon.color=0xff282930 \
                            label.color=0xff282930 \
                            background.color=0xffbd93f9 \
-                           background.border_color=0xffbd93f9
+                           background.border_color=0xffbd93f9 \
+                           background.padding_left=3 \
+                           background.padding_right=3
 else
     sketchybar --set $NAME icon.color=0xffbd93f9 \
                            label.color=0xffbd93f9 \
                            background.color=0xff282930 \
-                           background.border_color=0xff000000
+                           background.border_color=0xff000000 \
+                           background.padding_left=1 \
+                           background.padding_right=1
 fi
 
 if [[ $SENDER == "front_app_switched" ]]; then

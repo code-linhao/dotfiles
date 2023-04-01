@@ -203,7 +203,7 @@ case $@ in
 "Dropbox")
   icon_result=":dropbox:"
   ;;
-"微信")
+"微信" | "WeChat")
   icon_result=":wechat:"
   ;;
 "Typora")
