@@ -16,5 +16,5 @@ Paths used supposes SketchyBar files to be found in `$HOME/.config/sketchybar`. 
 Repository will be updated with more dotfiles.
 
 ### preview.
-![Screenshot 2023-01-02 at 10 25 46](https://user-images.githubusercontent.com/110169665/210221818-a8d2b2d0-508e-4a41-9011-45c81a023a58.jpg)
-![Screenshot 2023-01-02 at 10 25 06](https://user-images.githubusercontent.com/110169665/210221820-1189fa95-97ea-42eb-a314-8d912389cd35.jpg)
+![Screenshot 2023-04-01 at 11 36 25](https://user-images.githubusercontent.com/110169665/229284434-0c33b6ed-f764-488e-89f6-9fd5103833e8.png)
+![Screenshot 2023-04-01 at 11 37 14](https://user-images.githubusercontent.com/110169665/229284468-a422a46e-a092-49e4-955c-62d30ae7712a.png)
